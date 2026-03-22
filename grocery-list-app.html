@@ -4,36 +4,549 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Grocery List App – Case Study | Linet Gitonga</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="css/style.css">
-  <link href="https://fonts.googleapis.com/css?family=Montserrat:700|Open+Sans:400,600" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #1f2430;
+      --muted: #5b6477;
+      --line: #dfe3ec;
+      --paper: #f5f7fc;
+      --white: #ffffff;
+      --brand: #6f4fe4;
+      --brand-deep: #4e35bc;
+      --accent: #ff7f50;
+      --radius-lg: 22px;
+      --radius-md: 14px;
+      --radius-sm: 10px;
+    }
+
+    body {
+      font-family: "Source Sans 3", sans-serif;
+      color: var(--ink);
+      background: radial-gradient(circle at top right, #ece7ff 0%, #f7f9ff 32%, #ffffff 75%);
+    }
+
+    .case-navbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(16, 20, 30, 0.92);
+      backdrop-filter: blur(8px);
+    }
+
+    .case-navbar .navbar-brand,
+    .case-navbar .nav-link {
+      color: #ffffff !important;
+    }
+
+    .case-navbar .nav-link {
+      font-weight: 600;
+      font-size: 0.92rem;
+      letter-spacing: 0.02em;
+    }
+
+    .case-shell {
+      padding: 2.2rem 0 4rem;
+    }
+
+    .hero-card {
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      color: #ffffff;
+      position: relative;
+      background: linear-gradient(122deg, rgba(9, 7, 35, 0.96), rgba(65, 35, 148, 0.92));
+      min-height: 350px;
+      display: flex;
+      align-items: stretch;
+      box-shadow: 0 26px 40px rgba(45, 27, 101, 0.25);
+    }
+
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(115deg, rgba(12, 10, 39, 0.88) 16%, rgba(89, 54, 195, 0.72) 62%, rgba(132, 103, 233, 0.42));
+    }
+
+    .hero-card img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.35;
+    }
+
+    .hero-copy {
+      position: relative;
+      z-index: 1;
+      padding: 2.8rem;
+      max-width: 690px;
+    }
+
+    .hero-eyebrow {
+      display: inline-block;
+      padding: 0.4rem 0.75rem;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.16);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    .hero-copy h1,
+    .section-title {
+      font-family: "Space Grotesk", sans-serif;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .hero-copy h1 {
+      font-size: clamp(2rem, 4.3vw, 3.3rem);
+      margin-bottom: 0.6rem;
+      color: #ffffff;
+    }
+
+    .hero-copy p {
+      margin-bottom: 1.1rem;
+      font-size: 1.12rem;
+      line-height: 1.7;
+      max-width: 610px;
+    }
+
+    .meta-grid {
+      display: grid;
+      gap: 0.95rem;
+      margin-top: 1.5rem;
+      grid-template-columns: repeat(auto-fit, minmax(155px, 1fr));
+    }
+
+    .meta-card {
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      padding: 1rem;
+      box-shadow: 0 8px 18px rgba(38, 48, 73, 0.08);
+    }
+
+    .meta-card h3 {
+      margin: 0;
+      font-size: 1.3rem;
+      color: var(--brand-deep);
+      font-family: "Space Grotesk", sans-serif;
+    }
+
+    .meta-card p {
+      margin: 0.15rem 0 0;
+      color: var(--muted);
+      font-weight: 600;
+      font-size: 0.9rem;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+    }
+
+    .case-section {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--line);
+      padding: 2rem;
+      margin-top: 1.45rem;
+      box-shadow: 0 12px 26px rgba(35, 46, 75, 0.08);
+    }
+
+    .section-title {
+      font-size: clamp(1.35rem, 2.4vw, 2rem);
+      margin-bottom: 0.75rem;
+      color: #252a3a;
+    }
+
+    .section-sub {
+      color: var(--muted);
+      line-height: 1.75;
+      font-size: 1.04rem;
+    }
+
+    .checklist,
+    .insight-list,
+    .next-steps {
+      margin: 0;
+      padding-left: 1.15rem;
+    }
+
+    .checklist li,
+    .insight-list li,
+    .next-steps li {
+      margin-bottom: 0.65rem;
+      color: #333c4f;
+      line-height: 1.6;
+    }
+
+    .research-grid,
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 0.9rem;
+      margin-top: 1rem;
+    }
+
+    .research-card {
+      grid-column: span 4;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      padding: 1rem;
+    }
+
+    .research-card h4 {
+      margin: 0 0 0.45rem;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 1rem;
+      color: #283042;
+    }
+
+    .research-card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    .photo-card {
+      grid-column: span 4;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      border: 1px solid var(--line);
+      background: #eef2fa;
+    }
+
+    .photo-card img {
+      width: 100%;
+      height: 100%;
+      max-height: 250px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .photo-caption {
+      padding: 0.7rem 0.85rem;
+      color: #41506b;
+      font-size: 0.9rem;
+      font-weight: 600;
+      background: #fff;
+    }
+
+    .gallery-item {
+      grid-column: span 6;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      border: 1px solid var(--line);
+      background: #f9fbff;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      max-height: 420px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .quote-box {
+      margin-top: 1rem;
+      border-left: 4px solid var(--accent);
+      background: #fff7f2;
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      padding: 0.9rem 1rem;
+      color: #5a3a2a;
+      font-weight: 600;
+      line-height: 1.6;
+    }
+
+    .cta-row {
+      display: flex;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+      margin-top: 1rem;
+    }
+
+    .btn-case {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.68rem 1.05rem;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      transition: all 0.25s ease;
+      text-decoration: none;
+    }
+
+    .btn-case-primary {
+      background: linear-gradient(125deg, var(--brand), var(--brand-deep));
+      color: #ffffff;
+      box-shadow: 0 10px 22px rgba(88, 59, 194, 0.24);
+    }
+
+    .btn-case-primary:hover {
+      color: #ffffff;
+      transform: translateY(-1px);
+    }
+
+    .btn-case-secondary {
+      border-color: #c7d0e3;
+      color: #2a3142;
+      background: #ffffff;
+    }
+
+    .btn-case-secondary:hover {
+      color: #232b3b;
+      border-color: #9eaecf;
+    }
+
+    @media (max-width: 991.98px) {
+      .hero-copy {
+        padding: 2rem 1.5rem;
+      }
+
+      .case-section {
+        padding: 1.4rem;
+      }
+
+      .research-card,
+      .photo-card {
+        grid-column: span 6;
+      }
+    }
+
+    @media (max-width: 767.98px) {
+      .case-shell {
+        padding-top: 1.5rem;
+      }
+
+      .meta-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .research-card,
+      .photo-card,
+      .gallery-item {
+        grid-column: span 12;
+      }
+    }
+  </style>
 </head>
 <body>
-  <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light site-navbar-target">
+  <nav class="navbar navbar-expand-lg navbar-dark case-navbar">
     <div class="container">
       <a class="navbar-brand" href="index.html">Linet Gitonga<span>.</span></a>
-      <ul class="navbar-nav nav ml-auto">
-        <li class="nav-item"><a href="index.html#home-section" class="nav-link">Home</a></li>
-        <li class="nav-item"><a href="index.html#projects-section" class="nav-link">Projects</a></li>
-        <li class="nav-item"><a href="index.html#about-section" class="nav-link">About</a></li>
-        <li class="nav-item"><a href="index.html#contact-section" class="nav-link">Contact</a></li>
-      </ul>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#caseNav" aria-controls="caseNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="caseNav">
+        <ul class="navbar-nav nav ml-auto">
+          <li class="nav-item"><a href="index.html#home-section" class="nav-link">Home</a></li>
+          <li class="nav-item"><a href="index.html#projects-section" class="nav-link">Projects</a></li>
+          <li class="nav-item"><a href="graphics-showcase.html" class="nav-link">Graphics</a></li>
+          <li class="nav-item"><a href="index.html#about-section" class="nav-link">About</a></li>
+          <li class="nav-item"><a href="index.html#contact-section" class="nav-link">Contact</a></li>
+        </ul>
+      </div>
     </div>
   </nav>
 
-  <section class="case-study-layout mt-5">
+  <main class="case-shell">
     <div class="container">
-      <h2 class="mb-4">Grocery List App – Case Study</h2>
-      <ul class="project-details">
-        <li><strong>Problem Statement:</strong> [Describe the problem]</li>
-        <li><strong>Research Insights:</strong> [Summary of interviews/surveys]</li>
-        <li><strong>User Journey:</strong> [Journey steps, pain points, before/after]</li>
-        <li><strong>Wireframes:</strong> <img src="images/grocery-wireframe.png" alt="Wireframe"></li>
-        <li><strong>Final UI:</strong> <img src="images/grocery-final-ui.png" alt="Final UI"></li>
-        <li><strong>Impact:</strong> [Describe the impact]</li>
-        <li><strong>Figma Prototype:</strong> <a href="https://www.figma.com/proto/grocery-list-app" target="_blank">View Prototype</a></li>
-      </ul>
+      <section class="hero-card">
+        <img src="images/grocery/highfidelity/ui-rep.png" alt="Grocery List App visual cover">
+        <div class="hero-copy">
+          <span class="hero-eyebrow">UX Case Study</span>
+          <h1>Grocery List Mobile App</h1>
+          <p>
+            A practical shopping companion designed from field research, paper sketches, and a polished Figma prototype.
+            This project focused on making grocery planning faster for users across different age groups and digital comfort levels.
+          </p>
+          <div class="cta-row">
+            <a class="btn-case btn-case-primary" href="https://www.figma.com/proto/nkDmThIgikcjpExw1y3APY/Groceries-List-Mobile-App--Community-?node-id=67-332&p=f&t=jXrsTgiIMcJszS33-1&scaling=scale-down&content-scaling=fixed&page-id=0%3A1" target="_blank" rel="noopener noreferrer">View Interactive Prototype</a>
+            <a class="btn-case btn-case-secondary" href="index.html#projects-section">Back to Projects</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="meta-grid" aria-label="project summary">
+        <article class="meta-card">
+          <h3>4 Weeks</h3>
+          <p>Project Timeline</p>
+        </article>
+        <article class="meta-card">
+          <h3>3 Age Groups</h3>
+          <p>User Interviews</p>
+        </article>
+        <article class="meta-card">
+          <h3>Low to High-Fi</h3>
+          <p>Design Process</p>
+        </article>
+        <article class="meta-card">
+          <h3>Figma</h3>
+          <p>Interactive Prototype</p>
+        </article>
+      </section>
+
+      <section class="case-section">
+        <h2 class="section-title">Project Overview</h2>
+        <p class="section-sub">
+          Grocery shopping often becomes stressful when people forget items, cannot track quantities, or share lists inefficiently.
+          The goal of this app was to help users quickly create, organize, and complete grocery lists with less mental load and fewer repeat trips.
+        </p>
+      </section>
+
+      <section class="case-section">
+        <h2 class="section-title">Problem Statement</h2>
+        <p class="section-sub">
+          Users of different ages manage shopping differently, but they all face one core issue: remembering the right items at the right time.
+          Existing list tools felt either too basic, too cluttered, or not friendly for less tech-confident users.
+        </p>
+        <ul class="checklist">
+          <li>People forgot essential items when shopping in a hurry.</li>
+          <li>Family members had no shared, real-time view of a list.</li>
+          <li>Users wanted category organization without complicated setup.</li>
+          <li>Older users needed larger, clearer, simpler interactions.</li>
+        </ul>
+      </section>
+
+      <section class="case-section">
+        <h2 class="section-title">Research: Interviews Across 3 Age Groups</h2>
+        <p class="section-sub">
+          I conducted interviews with participants from three different age groups to understand behavior, pain points, and comfort with digital tools.
+          Sessions were completed in person using short scenario-based prompts and a follow-up task discussion.
+        </p>
+        <div class="research-grid">
+          <article class="research-card">
+            <h4>Age Group 18-24 (Students / Young Adults)</h4>
+            <p>Needed speed, quick add features, and better reminders because they shop between classes and errands.</p>
+          </article>
+          <article class="research-card">
+            <h4>Age Group 25-40 (Working Adults / Parents)</h4>
+            <p>Needed shared planning, categories, and budget visibility to coordinate family shopping efficiently.</p>
+          </article>
+          <article class="research-card">
+            <h4>Age Group 41+ (Caregivers / Mature Users)</h4>
+            <p>Preferred clarity over complexity: readable text, fewer taps, and a straightforward add-and-check flow.</p>
+          </article>
+        </div>
+
+        <div class="quote-box">
+          "I do not want to reopen three apps just to remember ingredients. I want one clear list that I can trust."
+        </div>
+
+        <h3 class="section-title mt-4">Field Research Documentation</h3>
+        <div class="research-grid">
+          <figure class="photo-card">
+            <img src="images/grocery/WhatsApp%20Image%202026-03-20%20at%2008.45.31.jpeg" alt="Interview session with participants discussing grocery planning pain points">
+            <figcaption class="photo-caption">Interview session: discussing how people currently track shopping items.</figcaption>
+          </figure>
+          <figure class="photo-card">
+            <img src="images/grocery/WhatsApp%20Image%202026-03-20%20at%2008.45.05.jpeg" alt="Contextual interview during user research for grocery app">
+            <figcaption class="photo-caption">Contextual interview: understanding routines, timing, and shopping triggers.</figcaption>
+          </figure>
+          <figure class="photo-card">
+            <img src="images/grocery/WhatsApp%20Image%202026-03-20%20at%2008.45.36.jpeg" alt="User interview notes captured during grocery app research">
+            <figcaption class="photo-caption">Research notes capture: validating recurring pain points across ages.</figcaption>
+          </figure>
+        </div>
+
+        <h3 class="section-title mt-4">Key Insights</h3>
+        <ul class="insight-list">
+          <li>Users wanted a gentle onboarding that immediately starts with creating a list.</li>
+          <li>Categorized items reduced confusion and made in-store movement faster.</li>
+          <li>A visible progress state (completed vs pending) increased confidence while shopping.</li>
+          <li>Simple typography and spacing improved usability for older participants.</li>
+        </ul>
+      </section>
+
+      <section class="case-section">
+        <h2 class="section-title">Low-Fidelity Ideation (Paper Sketches)</h2>
+        <p class="section-sub">
+          Before moving to digital UI, I translated interview insights into hand-drawn low-fidelity sketches.
+          This helped me test information architecture and interaction flow quickly before investing in visual polish.
+        </p>
+        <div class="gallery-grid">
+          <figure class="gallery-item">
+            <img src="images/grocery/llowfi%201.png" alt="Low-fidelity sketch showing end-to-end grocery app flow on paper">
+          </figure>
+          <figure class="gallery-item">
+            <img src="images/grocery/lowfi2.png" alt="Low-fidelity sketch exploring home and list organization screens">
+          </figure>
+          <figure class="gallery-item">
+            <img src="images/grocery/lowfi3.png" alt="Low-fidelity paper sketch for settings and profile options">
+          </figure>
+          <figure class="gallery-item">
+            <img src="images/grocery/lowfi4.png" alt="Low-fidelity sketch detailing user profile form structure">
+          </figure>
+        </div>
+      </section>
+
+      <section class="case-section">
+        <h2 class="section-title">High-Fidelity UI & Prototype in Figma</h2>
+        <p class="section-sub">
+          The final interface was designed in Figma with a clean visual system, focused hierarchy, and action-first components.
+          Core flows include list creation, adding item details, tagging, and tracking completion.
+        </p>
+        <div class="gallery-grid">
+          <figure class="gallery-item">
+            <img src="images/grocery/highfidelity/listapp.png" alt="High-fidelity screen of empty state in grocery list app">
+          </figure>
+          <figure class="gallery-item">
+            <img src="images/grocery/highfidelity/listapp-2.png" alt="High-fidelity modal for adding a new grocery item">
+          </figure>
+          <figure class="gallery-item">
+            <img src="images/grocery/highfidelity/listapp-3.png" alt="High-fidelity offers screen in grocery list app">
+          </figure>
+          <figure class="gallery-item">
+            <img src="images/grocery/highfidelity/ui-rep.png" alt="High-fidelity grocery app cover presentation">
+          </figure>
+        </div>
+        <div class="cta-row">
+          <a class="btn-case btn-case-primary" href="https://www.figma.com/proto/nkDmThIgikcjpExw1y3APY/Groceries-List-Mobile-App--Community-?node-id=67-332&p=f&t=jXrsTgiIMcJszS33-1&scaling=scale-down&content-scaling=fixed&page-id=0%3A1" target="_blank" rel="noopener noreferrer">Open Figma Prototype</a>
+        </div>
+      </section>
+
+      <section class="case-section">
+        <h2 class="section-title">Outcome & Impact</h2>
+        <p class="section-sub">
+          The prototype was reviewed against the original pain points from all three age groups.
+          Participants found the flow easier to understand and appreciated the balance between simplicity and feature depth.
+        </p>
+        <ul class="checklist">
+          <li>Clearer structure from onboarding to checkout of completed items.</li>
+          <li>Faster item entry with better quantity, unit, and price capture.</li>
+          <li>Higher confidence for users with lower digital familiarity.</li>
+          <li>A stronger foundation for future collaborative and reminder features.</li>
+        </ul>
+      </section>
+
+      <section class="case-section">
+        <h2 class="section-title">What I Learned</h2>
+        <p class="section-sub">
+          Research depth matters more than visual polish in the early phase. Interviewing across age groups revealed that the most inclusive design is often the simplest one.
+          Starting with paper sketches made iteration faster and helped me avoid premature UI decisions.
+        </p>
+        <h3 class="section-title mt-4">Next Steps</h3>
+        <ul class="next-steps">
+          <li>Add shared household lists with role permissions.</li>
+          <li>Introduce smart reminders based on shopping frequency.</li>
+          <li>Run usability testing with a larger participant pool.</li>
+          <li>Explore accessibility enhancements such as dynamic text scaling.</li>
+        </ul>
+      </section>
     </div>
-  </section>
+  </main>
 
   <footer class="ftco-footer ftco-section">
     <div class="container">
@@ -74,5 +587,9 @@
       </div>
     </div>
   </footer>
+
+  <script src="js/jquery.min.js"></script>
+  <script src="js/popper.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
 </body>
 </html>

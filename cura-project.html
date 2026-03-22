@@ -4,36 +4,449 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cura Project – Case Study | Linet Gitonga</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="css/style.css">
-  <link href="https://fonts.googleapis.com/css?family=Montserrat:700|Open+Sans:400,600" rel="stylesheet">
+  <style>
+    :root {
+      --cura-bg: #f4f8ff;
+      --cura-ink: #1d2b3d;
+      --cura-muted: #5b6f8f;
+      --cura-line: #d6dfed;
+      --cura-brand: #3676e0;
+      --cura-brand-deep: #0f4cad;
+      --cura-card: #ffffff;
+      --radius-lg: 22px;
+      --radius-md: 14px;
+    }
+
+    body {
+      font-family: "Source Sans 3", sans-serif;
+      color: var(--cura-ink);
+      background: radial-gradient(circle at top left, #eaf1ff 0%, #f7faff 45%, #ffffff 80%);
+    }
+
+    .cura-navbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(223, 224, 225, 0.92);
+      backdrop-filter: blur(8px);
+    }
+
+    .cura-navbar .navbar-brand,
+    .cura-navbar .nav-link {
+      color: #181818 !important;
+      
+    }
+
+    .cura-shell {
+      padding: 2.1rem 0 4rem;
+    }
+
+    .hero {
+      position: relative;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      min-height: 340px;
+      box-shadow: 0 20px 34px rgba(24, 44, 85, 0.2);
+      display: flex;
+      align-items: stretch;
+      background: linear-gradient(130deg, rgba(10, 23, 50, 0.94), rgba(23, 75, 162, 0.9));
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(120deg, rgba(10, 23, 50, 0.88) 20%, rgba(31, 97, 208, 0.68));
+    }
+
+    .hero img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      position: absolute;
+      inset: 0;
+      opacity: 0.3;
+    }
+
+    .hero-copy {
+      position: relative;
+      z-index: 2;
+      color: #fff;
+      padding: 2.6rem;
+      max-width: 760px;
+    }
+
+    .hero-copy h1,
+    .section-title,
+    .stat h3 {
+      font-family: "Manrope", sans-serif;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    .hero-copy h1 {
+      font-size: clamp(2rem, 4.2vw, 3.2rem);
+      margin-bottom: 0.7rem;
+      color: #fff;
+    }
+
+    .hero-copy p {
+      font-size: 1.08rem;
+      line-height: 1.72;
+      margin-bottom: 0;
+      max-width: 620px;
+    }
+
+    .chip {
+      display: inline-block;
+      margin-bottom: 1rem;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 999px;
+      padding: 0.35rem 0.75rem;
+      font-size: 0.76rem;
+      letter-spacing: 0.08em;
+      font-weight: 700;
+      text-transform: uppercase;
+      background: rgba(255, 255, 255, 0.12);
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+      gap: 0.95rem;
+      margin-top: 1.2rem;
+    }
+
+    .stat {
+      border-radius: var(--radius-md);
+      border: 1px solid var(--cura-line);
+      background: var(--cura-card);
+      padding: 1rem;
+      box-shadow: 0 8px 16px rgba(25, 46, 86, 0.07);
+    }
+
+    .stat h3 {
+      margin: 0;
+      color: var(--cura-brand-deep);
+      font-size: 1.3rem;
+    }
+
+    .stat p {
+      margin: 0.15rem 0 0;
+      color: var(--cura-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-size: 0.82rem;
+      font-weight: 700;
+    }
+
+    .section {
+      margin-top: 1.2rem;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--cura-line);
+      background: var(--cura-card);
+      padding: 1.8rem;
+      box-shadow: 0 12px 22px rgba(25, 46, 86, 0.08);
+    }
+
+    .section-title {
+      color: #1f3150;
+      font-size: clamp(1.3rem, 2.4vw, 1.95rem);
+      margin-bottom: 0.7rem;
+    }
+
+    .section p {
+      color: var(--cura-muted);
+      line-height: 1.72;
+      margin-bottom: 0;
+      font-size: 1.02rem;
+    }
+
+    .points {
+      margin: 0;
+      padding-left: 1.05rem;
+    }
+
+    .points li {
+      color: #324867;
+      margin-bottom: 0.55rem;
+      line-height: 1.6;
+    }
+
+    .process-grid,
+    .gallery {
+      margin-top: 1rem;
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 0.9rem;
+    }
+
+    .process-card {
+      grid-column: span 4;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--cura-line);
+      background: #f8fbff;
+      padding: 1rem;
+    }
+
+    .process-card h4 {
+      font-family: "Manrope", sans-serif;
+      font-size: 1rem;
+      margin: 0 0 0.45rem;
+      color: #26406b;
+    }
+
+    .process-card p {
+      margin: 0;
+      font-size: 0.96rem;
+      line-height: 1.6;
+    }
+
+    .gallery-item {
+      grid-column: span 6;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      border: 1px solid var(--cura-line);
+      background: #eff5ff;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      max-height: 390px;
+      object-fit: cover;
+    }
+
+    .quote {
+      margin-top: 1rem;
+      border-left: 4px solid var(--cura-brand);
+      background: #edf4ff;
+      padding: 0.9rem 1rem;
+      border-radius: 0 10px 10px 0;
+      color: #33517c;
+      font-weight: 700;
+      line-height: 1.55;
+    }
+
+    .cta-row {
+      margin-top: 1rem;
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-cura {
+      border-radius: 999px;
+      padding: 0.65rem 1rem;
+      text-decoration: none;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid transparent;
+    }
+
+    .btn-cura-primary {
+      background: linear-gradient(125deg, var(--cura-brand), var(--cura-brand-deep));
+      color: #fff;
+      box-shadow: 0 10px 20px rgba(33, 84, 172, 0.24);
+    }
+
+    .btn-cura-primary:hover {
+      color: #fff;
+    }
+
+    .btn-cura-secondary {
+      border-color: #aac2eb;
+      background: #fff;
+      color: #29456f;
+    }
+
+    .btn-cura-secondary:hover {
+      color: #1f3558;
+    }
+
+    @media (max-width: 991.98px) {
+      .hero-copy {
+        padding: 2rem 1.4rem;
+      }
+
+      .section {
+        padding: 1.4rem;
+      }
+
+      .process-card {
+        grid-column: span 6;
+      }
+    }
+
+    @media (max-width: 767.98px) {
+      .process-card,
+      .gallery-item {
+        grid-column: span 12;
+      }
+    }
+  </style>
 </head>
 <body>
-  <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light site-navbar-target">
+  <nav class="navbar navbar-expand-lg navbar-dark cura-navbar">
     <div class="container">
       <a class="navbar-brand" href="index.html">Linet Gitonga<span>.</span></a>
-      <ul class="navbar-nav nav ml-auto">
-        <li class="nav-item"><a href="index.html#home-section" class="nav-link">Home</a></li>
-        <li class="nav-item"><a href="index.html#projects-section" class="nav-link">Projects</a></li>
-        <li class="nav-item"><a href="index.html#about-section" class="nav-link">About</a></li>
-        <li class="nav-item"><a href="index.html#contact-section" class="nav-link">Contact</a></li>
-      </ul>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#curaNav" aria-controls="curaNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="curaNav">
+        <ul class="navbar-nav nav ml-auto">
+          <li class="nav-item"><a href="index.html#home-section" class="nav-link">Home</a></li>
+          <li class="nav-item"><a href="index.html#projects-section" class="nav-link">Projects</a></li>
+          <li class="nav-item"><a href="graphics-showcase.html" class="nav-link">Graphics</a></li>
+          <li class="nav-item"><a href="index.html#contact-section" class="nav-link">Contact</a></li>
+        </ul>
+      </div>
     </div>
   </nav>
 
-  <section class="case-study-layout mt-5">
+  <main class="cura-shell">
     <div class="container">
-      <h2 class="mb-4">Cura Project – Case Study</h2>
-      <ul class="project-details">
-        <li><strong>Problem Statement:</strong> [Describe the problem]</li>
-        <li><strong>Research Insights:</strong> [Summary of interviews/surveys]</li>
-        <li><strong>UI Design Process:</strong> [Steps, usability improvements, accessibility focus]</li>
-        <li><strong>Wireframes:</strong> <img src="images/cura-wireframe.png" alt="Wireframe"></li>
-        <li><strong>Final UI:</strong> <img src="images/cura-final-ui.png" alt="Final UI"></li>
-        <li><strong>Impact:</strong> [Describe the impact]</li>
-        <li><strong>Figma Prototype:</strong> <a href="https://www.figma.com/proto/cura-project" target="_blank">View Prototype</a></li>
-      </ul>
+      <section class="hero">
+        <img src="images/cura/cura-1.png" alt="Cura dashboard preview">
+        <div class="hero-copy">
+          <span class="chip">Team UX Case Study</span>
+          <h1>Cura Platform Design Process</h1>
+          <p>
+            Cura is a data-heavy product workflow where usability, clarity, and speed were essential.
+            I was part of a team during this project, and our progress came from multiple design meetings,
+            structured feedback loops, and iterative interface improvements.
+          </p>
+        </div>
+
+        <div class="cta-row">
+          <a class="btn-cura btn-cura-primary" href="https://www.figma.com/proto/Im1vO3QdUUFUUdQ356OUrZ/FINANCIAL-SYSTEM?node-id=1-29343&p=f&t=Y3f3oOVQL8ZdscCr-1&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=1%3A29537" target="_blank" rel="noopener noreferrer">Open Figma Prototype</a>
+        </div>
+
+
+      </section>
+
+      <section class="stats" aria-label="project highlights">
+        <article class="stat">
+          <h3>Team Collaboration</h3>
+          <p>Co-created with designers</p>
+        </article>
+        <article class="stat">
+          <h3>Multiple Meetings</h3>
+          <p>Review and alignment cycles</p>
+        </article>
+        <article class="stat">
+          <h3>6+ Core Screens</h3>
+          <p>Designed and refined</p>
+        </article>
+        <article class="stat">
+          <h3>Usability Focus</h3>
+          <p>Reduced cognitive load</p>
+        </article>
+      </section>
+
+      <section class="section">
+        <h2 class="section-title">Project Context</h2>
+        <p>
+          The platform supports transaction uploads, records, and analytics, but early versions had friction in navigation,
+          field entry, and data readability. Our objective was to make the product easier for users to learn and faster to use daily.
+        </p>
+      </section>
+
+      <section class="section">
+        <h2 class="section-title">My Role in the Team</h2>
+        <p>
+          I contributed to interface design, workflow refinement, and usability decisions with the rest of the product team.
+          During multiple meetings, we reviewed pain points, prioritized improvements, and agreed on consistent component behavior.
+        </p>
+        <ul class="points mt-3">
+          <li>Translated meeting notes into actionable UI changes.</li>
+          <li>Aligned visual consistency across forms, dashboards, and records.</li>
+          <li>Improved hierarchy for tables, key actions, and data summaries.</li>
+          <li>Supported iterative prototype updates after each review session.</li>
+        </ul>
+        <div class="quote">
+          Team process highlight: frequent review meetings helped us validate decisions early and avoid expensive redesign later.
+        </div>
+      </section>
+
+      <section class="section">
+        <h2 class="section-title">Design Process</h2>
+        <div class="process-grid">
+          <article class="process-card">
+            <h4>1. Problem Framing</h4>
+            <p>Mapped user pain points in transaction upload, account selection, and navigation discoverability.</p>
+          </article>
+          <article class="process-card">
+            <h4>2. Team Review Meetings</h4>
+            <p>Held recurring alignment sessions to evaluate options and prioritize the most impactful UI updates.</p>
+          </article>
+          <article class="process-card">
+            <h4>3. Iterative Prototyping</h4>
+            <p>Produced multiple design versions and improved form flow, dashboard readability, and system feedback.</p>
+          </article>
+          <article class="process-card">
+            <h4>4. Visual Consistency</h4>
+            <p>Standardized spacing, typography, and interaction states for a cleaner and more predictable experience.</p>
+          </article>
+          <article class="process-card">
+            <h4>5. Workflow Simplification</h4>
+            <p>Reduced complexity in multi-field entry tasks by clarifying labels, grouping fields, and action placement.</p>
+          </article>
+          <article class="process-card">
+            <h4>6. Outcome Validation</h4>
+            <p>Used team feedback and walkthroughs to confirm that key tasks were easier to complete end-to-end.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2 class="section-title">Selected Interface Screens</h2>
+        <div class="gallery">
+          <figure class="gallery-item">
+            <img src="images/cura/cura-1.png" alt="Cura user profile and dashboard layout">
+          </figure>
+          <figure class="gallery-item">
+            <img src="images/cura/cura-2.png" alt="Cura transaction upload form and details">
+          </figure>
+          <figure class="gallery-item">
+            <img src="images/cura/cura-3.png" alt="Cura transaction upload workflow with tables">
+          </figure>
+          <figure class="gallery-item">
+            <img src="images/cura/cura-4.png" alt="Cura analytics donut chart on dashboard">
+          </figure>
+          <figure class="gallery-item">
+            <img src="images/cura/cura-5.png" alt="Cura analytics and dashboard overview layout">
+          </figure>
+          <figure class="gallery-item">
+            <img src="images/cura/cura-6.png" alt="Cura login interface and authentication screen">
+          </figure>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2 class="section-title">Outcome</h2>
+        <ul class="points">
+          <li>Cleaner information hierarchy for transactional workflows.</li>
+          <li>Improved clarity in data-heavy screens and analytics views.</li>
+          <li>Stronger design consistency after team alignment meetings.</li>
+          <li>A reusable UI direction for future product expansion.</li>
+        </ul>
+        <div class="cta-row">
+          <a href="index.html#projects-section" class="btn-cura btn-cura-primary">View More Projects</a>
+          <a href="index.html#contact-section" class="btn-cura btn-cura-secondary">Request Prototype Walkthrough</a>
+        </div>
+      </section>
     </div>
-  </section>
+  </main>
 
   <footer class="ftco-footer ftco-section">
     <div class="container">
@@ -74,5 +487,9 @@
       </div>
     </div>
   </footer>
+
+  <script src="js/jquery.min.js"></script>
+  <script src="js/popper.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
 </body>
 </html>

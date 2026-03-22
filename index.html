@@ -17,6 +17,120 @@
 	
 	<link rel="stylesheet" href="css/flaticon.css">
 	<link rel="stylesheet" href="css/style.css">
+	<style>
+		.projects-intro-copy {
+			max-width: 760px;
+			margin: 0 auto;
+			font-size: 1.05rem;
+			line-height: 1.7;
+		}
+
+		.project-card-enhanced {
+			position: relative;
+			min-height: 360px;
+			border-radius: 18px;
+			overflow: hidden;
+			background-size: cover;
+			background-position: center;
+			box-shadow: 0 20px 34px rgba(22, 25, 41, 0.18);
+			transition: transform 0.28s ease, box-shadow 0.28s ease;
+		}
+
+		.project-card-enhanced::before {
+			content: "";
+			position: absolute;
+			inset: 0;
+			background: linear-gradient(180deg, rgba(11, 14, 27, 0.2), rgba(11, 14, 27, 0.86));
+		}
+
+		.project-card-enhanced:hover {
+			transform: translateY(-6px);
+			box-shadow: 0 26px 38px rgba(22, 25, 41, 0.22);
+		}
+
+		.project-card-content {
+			position: relative;
+			z-index: 2;
+			padding: 1.6rem;
+			width: 100%;
+		}
+
+		.project-chip {
+			display: inline-block;
+			padding: 0.35rem 0.75rem;
+			border-radius: 999px;
+			font-size: 0.72rem;
+			font-weight: 700;
+			letter-spacing: 0.09em;
+			text-transform: uppercase;
+			border: 1px solid rgba(255, 255, 255, 0.24);
+			background: rgba(255, 255, 255, 0.12);
+			color: #fff;
+			margin-bottom: 0.85rem;
+		}
+
+		.project-card-content h3 {
+			font-size: 1.55rem;
+			font-weight: 700;
+			color: #fff;
+			margin-bottom: 0.55rem;
+		}
+
+		.project-card-content p {
+			color: rgba(255, 255, 255, 0.92);
+			margin-bottom: 0.9rem;
+			line-height: 1.65;
+		}
+
+		.project-points {
+			padding-left: 1rem;
+			margin-bottom: 0;
+		}
+
+		.project-points li {
+			color: rgba(255, 255, 255, 0.88);
+			font-size: 0.93rem;
+			margin-bottom: 0.35rem;
+		}
+
+		.projects-trust-note {
+			margin-top: 1.6rem;
+			padding: 1rem 1.2rem;
+			border-radius: 12px;
+			background: #f7f8ff;
+			border: 1px solid #dde2f6;
+			color: #3f4860;
+			font-weight: 600;
+			text-align: center;
+		}
+
+		.hero-video-col {
+			position: relative;
+			overflow: hidden;
+			background-image: none !important;
+		}
+
+		.hero-video-bg {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			z-index: 0;
+		}
+
+		.hero-video-col .overlay,
+		.hero-video-col .overlay-1 {
+			z-index: 1;
+		}
+
+		@media (max-width: 991.98px) {
+			.project-card-enhanced {
+				min-height: 320px;
+			}
+		}
+	</style>
 </head>
 <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
 	
@@ -32,6 +146,7 @@
 				<ul class="navbar-nav nav ml-auto">
 					<li class="nav-item"><a href="#home-section" class="nav-link"><span>Home</span></a></li>
 					<li class="nav-item"><a href="#projects-section" class="nav-link"><span>Projects</span></a></li>
+					<li class="nav-item"><a href="graphics-showcase.html" class="nav-link"><span>Graphics</span></a></li>
 					<li class="nav-item"><a href="#about-section" class="nav-link"><span>About</span></a></li>
 					<li class="nav-item"><a href="#contact-section" class="nav-link"><span>Contact</span></a></li>
 				</ul>
@@ -55,6 +170,7 @@
 								<p><a href="#projects-section" class="btn btn-primary">View Projects</a> <a href="#contact-section" class="btn btn-primary btn-outline-primary">Contact Me</a></p>
 							</div>
 						</div>
+						
 					</div>
 				</div>
 			</div>
@@ -76,6 +192,85 @@
 						</div>
 					</div>
 				</div>
+			</div>
+
+
+
+			<div class="slider-item">
+				<div class="overlay"></div>
+				<div class="container-fluid px-md-0">
+					<div class="row d-flex no-gutters slider-text align-items-end justify-content-end" data-scrollax-parent="true">
+						<div class="one-third order-md-last img hero-video-col" style="background-image:url(images/bg_2_linet.jpg);">
+							<video class="hero-video-bg" autoplay muted loop playsinline preload="metadata" poster="images/bg_2_linet.jpg">
+								<source src="images/new.mp4" type="video/mp4">
+							</video>
+							<div class="overlay"></div>
+							<div class="overlay-1"></div>
+						</div>
+						<div class="one-forth d-flex align-items-center ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
+							<div class="text">
+								<span class="subheading">Understanding &amp; Building Brands</span>
+								<h1 class="mb-4 mt-3">Hi, I am <span>Linet</span> a User Experience Designer.</h1>
+								<p><a href="#contact-section" class="btn btn-primary">Hire Me</a> <a href="#projects-section" class="btn btn-primary btn-outline-primary">View Work</a></p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section class="ftco-section ftco-project" id="projects-section">
+		<div class="container-fluid px-md-4">
+			<div class="row justify-content-center pb-5">
+				<div class="col-md-12 heading-section text-center ftco-animate">
+					<span class="subheading">Case Studies</span>
+					<h2 class="mb-4">Selected Work That Solves Real User Problems</h2>
+					<p class="projects-intro-copy">Explore research-led product design, collaborative UX process, and visual communication work. Each project highlights how I translate insights into interfaces people can understand, trust, and use.</p>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-4 mb-4">
+					<a href="grocery-list-app.html" class="project-card-enhanced ftco-animate d-flex align-items-end" style="background-image: url(images/grocery/highfidelity/ui-rep.png);">
+						<div class="project-card-content">
+							<span class="project-chip">UX Case Study</span>
+							<h3>Grocery List App</h3>
+							<p>End-to-end design from interview research with multiple age groups to low-fidelity sketches and a high-fidelity Figma prototype.</p>
+							<ul class="project-points">
+								<li>Field interviews and pain-point analysis</li>
+								<li>Paper wireframes to prototype validation</li>
+							</ul>
+						</div>
+					</a>
+				</div>
+				<div class="col-lg-4 mb-4">
+					<a href="cura-project.html" class="project-card-enhanced ftco-animate d-flex align-items-end" style="background-image: url(images/cura/cura-1.png);">
+						<div class="project-card-content">
+							<span class="project-chip">Team Project</span>
+							<h3>Cura Platform</h3>
+							<p>A collaborative product design project where I worked with a team through multiple design review meetings and iterative UI refinements.</p>
+							<ul class="project-points">
+								<li>Cross-functional meeting-driven design</li>
+								<li>Usability-first dashboard improvements</li>
+							</ul>
+						</div>
+					</a>
+				</div>
+				<div class="col-lg-4 mb-4">
+					<a href="graphics-showcase.html" class="project-card-enhanced ftco-animate d-flex align-items-end" style="background-image: url(images/graphics/Top%20Talent%20Hollywood%20May%20Poster%20version%201.jpg);">
+						<div class="project-card-content">
+							<span class="project-chip">Visual Design</span>
+							<h3>Graphics & Brand Visuals</h3>
+							<p>A curated gallery of posters, social graphics, article visuals, and campaign artwork that strengthen communication and brand consistency.</p>
+							<ul class="project-points">
+								<li>Books, articles, posters, menus, and logos</li>
+								<li>Audience-focused visual storytelling</li>
+							</ul>
+						</div>
+					</a>
+				</div>
+			</div>
+			<div class="projects-trust-note ftco-animate">
+				Recruiters: these pages show my process, collaboration style, and outcomes, not just polished screens.
 			</div>
 		</div>
 	</section>
@@ -496,48 +691,7 @@
 		</div>
 	</section>
 
-	<section class="ftco-section ftco-project" id="projects-section">
-		<div class="container-fluid px-md-4">
-			<div class="row justify-content-center pb-5">
-				<div class="col-md-12 heading-section text-center ftco-animate">
-					<span class="subheading">Accomplishments</span>
-					<h2 class="mb-4">Our Projects</h2>
-					<p>We guide every person's userjourney to capture simplicity and elegance in design.</p>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-6">
-					<a href="grocery-list-app.html" class="project-card project img shadow ftco-animate d-flex justify-content-center align-items-center" style="background-image: url(images/grocery-app.jpg);">
-						<div class="overlay"></div>
-						<div class="text text-center p-4">
-							<h3>Grocery List App</h3>
-							<span>Research, interviews, pain points, wireframes, final UI</span>
-						</div>
-					</a>
-				</div>
-				<div class="col-md-6">
-					<a href="cura-project.html" class="project-card project img shadow ftco-animate d-flex justify-content-center align-items-center" style="background-image: url(images/cura-project.jpg);">
-						<div class="overlay"></div>
-						<div class="text text-center p-4">
-							<h3>Cura Project</h3>
-							<span>UI design process, usability improvements, accessibility focus</span>
-						</div>
-					</a>
-				</div>
-			</div>
-			<!-- Case Study Layout Example (for project pages) -->
-			<div class="case-study-layout mt-5">
-				<h3>Case Study: Grocery List App</h3>
-				<ul>
-					<li><strong>Problem Statement:</strong> [Describe the problem]</li>
-					<li><strong>Research Insights:</strong> [Summary of interviews/surveys]</li>
-					<li><strong>Wireframes:</strong> <img src="images/grocery-wireframe.png" alt="Wireframe"></li>
-					<li><strong>Final UI:</strong> <img src="images/grocery-final-ui.png" alt="Final UI"></li>
-					<li><strong>Impact:</strong> [Describe the impact]</li>
-				</ul>
-			</div>
-		</div>
-	</section>
+	
 
 	<section class="ftco-section testimony-section bg-primary">
 		<div class="container">
